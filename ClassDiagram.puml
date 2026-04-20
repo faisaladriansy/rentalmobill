@@ -1,0 +1,90 @@
+@startuml ClassDiagram_RentalMobil_Simple
+
+' Styling sederhana
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor LightBlue
+    BorderColor DarkBlue
+}
+
+' ==================== ENTITY CLASSES ====================
+
+class User {
+    iduser
+    username
+    password
+    ____
+    + login()
+    + logout()
+}
+
+class Merk {
+    idmerk
+    namamerk
+    ____
+    + getMerk()
+    + saveMerk()
+}
+
+class Mobil {
+    idmobil
+    idmerk
+    platnomer
+    type
+    tahun
+    tarif
+    status
+    foto
+    ____
+    + getMobil()
+    + saveMobil()
+    + updateStatus()
+}
+
+class Supir {
+    idsupir
+    namasupir
+    alamat
+    noktp
+    tarif
+    foto
+    ____
+    + getSupir()
+    + saveSupir()
+}
+
+class Transaksi {
+    idtransaksi
+    idmobil
+    idsupir
+    namapelanggan
+    noktp
+    tglsewa
+    tglkembali
+    total
+    status
+    ____
+    + saveTransaksi()
+    + selesaikanTransaksi()
+    + hitungTotal()
+}
+
+' ==================== RELATIONSHIPS ====================
+
+Merk "1" -- "0..*" Mobil
+Mobil "1" -- "0..*" Transaksi
+Supir "0..1" -- "0..*" Transaksi
+
+' ==================== LEGEND ====================
+
+legend right
+  **Keterangan:**
+  - Satu merk memiliki banyak mobil
+  - Satu mobil dapat disewa berkali-kali
+  - Transaksi bisa dengan atau tanpa supir
+  
+  Status mobil: tersedia / sedang disewa
+  Status transaksi: aktif / selesai
+end legend
+
+@enduml

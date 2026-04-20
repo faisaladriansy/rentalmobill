@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERD - Sistem Rental Mobil</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        .erd-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .table {
+            background: white;
+            border: 3px solid #34495e;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            min-width: 200px;
+        }
+        
+        .table-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 7px 7px 0 0;
+        }
+        
+        .table-body {
+            padding: 15px;
+        }
+        
+        .field {
+            padding: 5px 0;
+            font-size: 13px;
+            color: #2c3e50;
+        }
+        
+        .pk {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .fk {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        .relations {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .arrow {
+            color: #e74c3c;
+            margin: 0 15px;
+            font-size: 24px;
+        }
+        
+        .cardinality {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin: 0 5px;
+        }
+        
+        .legend {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .legend-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        
+        .pk-color { background: #e74c3c; }
+        .fk-color { background: #f39c12; }
+        .relation-color { background: #34495e; }
+        .optional-color { background: #95a5a6; }
+        
+        .business-rules {
+            background: #e8f5e8;
+            border: 2px solid #27ae60;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .rule {
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .rule::before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            📊 Entity Relationship Diagram<br>
+            <span style="font-size: 20px; color: #7f8c8d;">Sistem Rental Mobil</span>
+        </div>
+        
+        <!-- ERD Tables -->
+        <div class="erd-container">
+            <!-- MERK Table -->
+            <div class="table">
+                <div class="table-header">🏷️ MERK</div>
+                <div class="table-body">
+                    <div class="field pk">🔑 idmerk (PK)</div>
+                    <div class="field">namamerk</div>
+                    <div class="field">namamerk_seo</div>
+                </div>
+            </div>
+            
+            <!-- MOBIL Table -->
+            <div class="table">
+                <div class="table-header">🚗 MOBIL</div>
+                <div class="table-body">
+                    <div class="field pk">🔑 idmobil (PK)</div>
+                    <div class="field">date</div>
+                    <div class="field fk">🔗 idmerk (FK)</div>
+                    <div class="field">type</div>
+                    <div class="field">tahunproduksi</div>
+                    <div class="field">platnomer</div>
+                    <div class="field">kursi</div>
+                    <div class="field">tarif</div>
+                    <div class="field">lembur</div>
+                    <div class="field">norangka</div>
+                    <div class="field">foto</div>
+                    <div class="field">stmobil</div>
+                </div>
+            </div>
+            
+            <!-- TRANSAKSI Table -->
+            <div class="table">
+                <div class="table-header">📋 TRANSAKSI</div>
+                <div class="table-body">
+                    <div class="field pk">🔑 idtransaksi (PK)</div>
+                    <div class="field">date</div>
+                    <div class="field">namapelanggan</div>
+                    <div class="field">noktp</div>
+                    <div class="field">nohp</div>
+                    <div class="field">alamat</div>
+                    <div class="field">tglsewa</div>
+                    <div class="field">tglkembali</div>
+                    <div class="field">selisih</div>
+                    <div class="field fk">🔗 idmobil (FK)</div>
+                    <div class="field fk">🔗 idsupir (FK)</div>
+                    <div class="field">total</div>
+                    <div class="field">sttransaksi</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SUPIR Table (Separate) -->
+        <div style="display: flex; justify-content: center; margin: 20px 0;">
+            <div class="table">
+                <div class="table-header">👨‍💼 SUPIR</div>
+                <div class="table-body">
+                    <div class="field pk">🔑 idsupir (PK)</div>
+                    <div class="field">date</div>
+                    <div class="field">namasupir</div>
+                    <div class="field">tgllahir</div>
+                    <div class="field">alamat</div>
+                    <div class="field">noktp</div>
+                    <div class="field">foto</div>
+                    <div class="field">tarif</div>
+                    <div class="field">lembur</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Relations -->
+        <div class="relations">
+            MERK <span class="cardinality">1</span> <span class="arrow">──→</span> 
+            MOBIL <span class="cardinality">M</span> <span class="arrow">──→</span> 
+            TRANSAKSI <span class="cardinality">M</span>
+        </div>
+        
+        <div class="relations">
+            <span style="margin-right: 100px;"></span>
+            SUPIR <span class="cardinality">1</span> <span class="arrow">──→</span> 
+            TRANSAKSI <span class="cardinality">M</span>
+            <span style="font-size: 14px; color: #7f8c8d; margin-left: 10px;">(Optional)</span>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">📖 Keterangan Simbol</div>
+            <div class="legend-grid">
+                <div>
+                    <div class="legend-item">
+                        <div class="legend-color pk-color"></div>
+                        <span>🔑 Primary Key (PK) - Kunci Utama</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color fk-color"></div>
+                        <span>🔗 Foreign Key (FK) - Kunci Asing</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="legend-item">
+                        <div class="legend-color relation-color"></div>
+                        <span>──→ Relasi Wajib (Mandatory)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color optional-color"></div>
+                        <span>- - → Relasi Opsional (Optional)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Business Rules -->
+        <div class="business-rules">
+            <div class="legend-title">⚖️ Aturan Bisnis (Business Rules)</div>
+            <div class="rule">Satu merk dapat memiliki banyak mobil (Toyota → Avanza, Innova, Fortuner)</div>
+            <div class="rule">Satu mobil dapat memiliki banyak transaksi rental (history sewa)</div>
+            <div class="rule">Satu supir dapat melayani banyak transaksi (atau lepas kunci)</div>
+            <div class="rule">Merk tidak bisa dihapus jika masih ada mobil yang menggunakannya</div>
+            <div class="rule">Mobil tidak bisa dihapus jika masih ada transaksi aktif</div>
+            <div class="rule">Supir bisa dihapus, transaksi akan menjadi "Lepas Kunci"</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+@startuml UseCase_Simple
+
+left to right direction
+
+' Styling
+skinparam usecase {
+    BackgroundColor LightBlue
+    BorderColor DarkBlue
+}
+
+skinparam actor {
+    BackgroundColor LightYellow
+    BorderColor DarkOrange
+}
+
+' Actors di kiri
+actor Customer as C
+actor Admin as A
+actor Manager as M
+
+' System boundary
+rectangle "Sistem Rental Mobil" {
+    
+    ' Use cases untuk Customer
+    (Buat Transaksi Baru) as UC1
+    (Cek Ketersediaan\n& Hitung Biaya) as UC_Check
+    
+    ' Use cases untuk Admin
+    (Proses Sewa\nUpdate Status) as UC_Process
+    (Cetak Invoice) as UC_Print
+    
+    ' Use cases untuk Manager
+    (Lihat Laporan\nTransaksi) as UC_Report
+    (Pantau Keluar\nMasuk Mobil) as UC_Monitor
+    
+    ' Use case umum
+    (Login) as UC4
+}
+
+' Relasi Customer
+C --> UC1
+
+' Relasi Admin
+A --> UC_Process
+
+' Relasi Manager
+M --> UC_Report
+M --> UC_Monitor
+
+' Include relationships
+UC1 ..> UC4 : <<include>>
+UC1 ..> UC_Check : <<include>>
+UC_Process ..> UC_Print : <<include>>
+UC_Report ..> UC4 : <<include>>
+UC_Monitor ..> UC4 : <<include>>
+
+' Extend relationship
+UC_Process ..> UC1 : <<extend>>
+
+@enduml

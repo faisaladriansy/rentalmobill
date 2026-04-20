@@ -1,0 +1,33 @@
+@startuml SequenceDiagram_Simple
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 10
+
+actor Admin
+participant "Sistem" as sistem
+database "Database" as db
+
+title Sequence Diagram Sederhana - Transaksi Rental Mobil
+
+== Tambah Transaksi ==
+Admin -> sistem : Buka form transaksi
+sistem -> db : Ambil data mobil tersedia
+db --> sistem : Daftar mobil
+sistem -> db : Ambil data supir
+db --> sistem : Daftar supir
+sistem --> Admin : Tampilkan form
+
+Admin -> sistem : Isi data pelanggan dan simpan
+sistem -> db : Simpan transaksi baru
+sistem -> db : Ubah status mobil menjadi sedang disewa
+db --> sistem : Berhasil
+sistem --> Admin : Transaksi berhasil dibuat
+
+== Selesaikan Transaksi ==
+Admin -> sistem : Klik tombol selesai
+sistem -> db : Ubah status transaksi menjadi selesai
+sistem -> db : Ubah status mobil menjadi tersedia
+db --> sistem : Berhasil
+sistem --> Admin : Transaksi selesai
+
+@enduml

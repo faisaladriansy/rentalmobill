@@ -1,0 +1,36 @@
+@startuml ActivityDiagram_Transaksi_Simple
+
+skinparam activityBackgroundColor LightBlue
+skinparam activityBorderColor DarkBlue
+skinparam activityDiamondBackgroundColor LightYellow
+skinparam activityDiamondBorderColor Orange
+
+title Activity Diagram Sederhana - Tambah Transaksi
+
+start
+
+:Admin buka form transaksi;
+
+:Sistem tampilkan form dengan
+daftar mobil dan supir;
+
+:Admin isi data pelanggan
+dan pilih mobil/supir;
+
+if (Data lengkap dan valid?) then (tidak)
+  :Tampilkan pesan error;
+  stop
+else (ya)
+  :Sistem hitung total biaya;
+  
+  :Simpan transaksi;
+  
+  :Ubah status mobil
+  menjadi sedang disewa;
+  
+  :Tampilkan pesan berhasil;
+  
+  stop
+endif
+
+@enduml

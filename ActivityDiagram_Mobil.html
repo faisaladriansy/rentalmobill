@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Diagram - Mengelola Data Mobil</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 22px; margin-bottom: 6px; }
+        .header p { font-size: 13px; opacity: 0.85; }
+
+        .diagram-wrapper { padding: 30px; }
+
+        /* Swimlane table */
+        .swim-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #333;
+        }
+
+        .swim-table th {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            background: #f0f0f0;
+            width: 50%;
+        }
+
+        .swim-table td {
+            border-right: 2px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 8px 15px;
+            vertical-align: middle;
+            text-align: center;
+            width: 50%;
+            min-height: 50px;
+        }
+
+        .swim-table td:last-child { 
+            border-right: none; 
+        }
+
+        .swim-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Remove border for arrow-only rows */
+        .swim-table tr.arrow-row td {
+            border-bottom: none;
+            padding: 2px 15px;
+        }
+
+        /* Nodes */
+        .t-start {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: #000;
+            display: inline-block;
+        }
+
+        .t-end-outer {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            border: 3px solid #000;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .t-end-inner {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: #000;
+        }
+
+        .t-action {
+            border: 2px solid #333;
+            border-radius: 18px;
+            padding: 9px 16px;
+            font-size: 13px;
+            display: inline-block;
+            background: white;
+            min-width: 170px;
+            line-height: 1.4;
+        }
+
+        .t-decision {
+            width: 55px; height: 55px;
+            border: 2px solid #333;
+            background: white;
+            transform: rotate(45deg);
+            display: inline-block;
+        }
+
+        /* Arrows */
+        .arr-down {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2px 0;
+        }
+
+        .arr-line { width: 2px; height: 18px; background: #333; }
+
+        .arr-tip {
+            width: 0; height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 7px solid #333;
+        }
+
+        .label-small {
+            font-size: 11px;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* Branch row: two actions side by side in Admin lane */
+        .branch-wrap {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .branch-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📊 Activity Diagram</h1>
+        <p>Mengelola Data Mobil — Sistem Rental Mobil</p>
+    </div>
+
+    <div class="diagram-wrapper">
+        <table class="swim-table">
+            <thead>
+                <tr>
+                    <th>Admin</th>
+                    <th>Sistem</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- 1. Start -->
+                <tr>
+                    <td><span class="t-start"></span></td>
+                    <td></td>
+                </tr>
+
+                <!-- arrow -->
+                <tr class="arrow-row">
+                    <td><div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div></td>
+                    <td></td>
+                </tr>
+
+                <!-- 2. Admin Login → Sistem tampil halaman -->
+                <tr>
+                    <td><span class="t-action">Admin Login Sistem</span></td>
+                    <td><span class="t-action">Sistem Menampilkan<br>Halaman Utama</span></td>
+                </tr>
+
+                <!-- arrow -->
+                <tr class="arrow-row">
+                    <td><div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div></td>
+                    <td><div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div></td>
+                </tr>
+
+                <!-- 3. Admin pilih menu → Sistem tampil daftar -->
+                <tr>
+                    <td><span class="t-action">Admin Memilih<br>Menu Data Mobil</span></td>
+                    <td><span class="t-action">Menampilkan Daftar<br>Data Mobil</span></td>
+                </tr>
+
+                <!-- arrow -->
+                <tr class="arrow-row">
+                    <td><div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div></td>
+                    <td><div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div></td>
+                </tr>
+
+                <!-- 4. Memilih Mobil (dari sistem ke admin) -->
+                <tr>
+                    <td><span class="t-action">Memilih Mobil</span></td>
+                    <td></td>
+                </tr>
+
+                <!-- arrow -->
+                <tr class="arrow-row">
+                    <td><div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div></td>
+                    <td></td>
+                </tr>
+
+                <!-- 5. Decision diamond -->
+                <tr>
+                    <td><div class="t-decision"></div></td>
+                    <td></td>
+                </tr>
+
+                <!-- 6. Branch: Edit Mobil (kiri) | Tambah Mobil (kanan) -->
+                <tr>
+                    <td>
+                        <div class="branch-wrap">
+                            <!-- Edit branch -->
+                            <div class="branch-item">
+                                <span class="label-small">Edit Mobil</span>
+                                <div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div>
+                                <span class="t-action">Edit Data Mobil</span>
+                            </div>
+                            <!-- Tambah branch -->
+                            <div class="branch-item">
+                                <span class="label-small">Tambah Mobil</span>
+                                <div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div>
+                                <span class="t-action">Tambah Data<br>Mobil Baru</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <!-- arrow: kedua branch merge ke Sistem -->
+                <tr class="arrow-row">
+                    <td>
+                        <div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <!-- 7. Menyimpan Data Mobil — HANYA SEKALI di Sistem -->
+                <tr>
+                    <td></td>
+                    <td><span class="t-action">Menyimpan<br>Data Mobil</span></td>
+                </tr>
+
+                <!-- arrow -->
+                <tr class="arrow-row">
+                    <td></td>
+                    <td><div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div></td>
+                </tr>
+
+                <!-- 8. Notifikasi -->
+                <tr>
+                    <td></td>
+                    <td><span class="t-action">Menampilkan Notifikasi<br>Berhasil</span></td>
+                </tr>
+
+                <!-- arrow -->
+                <tr class="arrow-row">
+                    <td></td>
+                    <td><div class="arr-down"><div class="arr-line"></div><div class="arr-tip"></div></div></td>
+                </tr>
+
+                <!-- 9. End -->
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="t-end-outer">
+                            <div class="t-end-inner"></div>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PlantUML Code -->
+    <div style="padding: 10px 30px 30px;">
+        <h3 style="color: #2a5298; margin-bottom: 12px; font-size: 15px;">📝 PlantUML Code</h3>
+        <pre style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 18px; font-size: 12px; overflow-x: auto; line-height: 1.6;">@startuml ActivityDiagram_Mobil
+
+|Admin|
+start
+:Admin Login Sistem;
+
+|Sistem|
+:Sistem Menampilkan Halaman Utama;
+
+|Admin|
+:Admin Memilih Menu Data Mobil;
+
+|Sistem|
+:Menampilkan Daftar Data Mobil;
+
+|Admin|
+:Memilih Mobil;
+
+if (Pilih Aksi?) then
+  -> Edit Mobil;
+  :Edit Data Mobil;
+else
+  -> Tambah Mobil;
+  :Tambah Data Mobil Baru;
+endif
+
+|Sistem|
+:Menyimpan Data Mobil;
+:Menampilkan Notifikasi Berhasil;
+
+stop
+
+@enduml</pre>
+    </div>
+</div>
+
+</body>
+</html>

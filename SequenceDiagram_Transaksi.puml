@@ -1,0 +1,45 @@
+@startuml SequenceDiagram_Transaksi_Simple
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 10
+
+actor Admin
+participant "Sistem" as sistem
+database "Database" as db
+
+title Sequence Diagram Sederhana - Tambah Transaksi
+
+== Tambah Transaksi ==
+Admin -> sistem : Buka form transaksi
+sistem -> db : Ambil data mobil tersedia
+db --> sistem : Daftar mobil
+sistem -> db : Ambil data supir
+db --> sistem : Daftar supir
+sistem --> Admin : Tampilkan form
+
+Admin -> sistem : Isi data pelanggan dan simpan
+note right of Admin
+  Data transaksi:
+  - Nama Pelanggan
+  - No. KTP
+  - No. HP
+  - Alamat
+  - Tanggal Sewa
+  - Tanggal Kembali
+  - Mobil
+  - Supir (opsional)
+end note
+sistem -> db : Simpan transaksi baru
+sistem -> db : Ubah status mobil menjadi sedang disewa
+db --> sistem : Berhasil
+sistem --> Admin : Transaksi berhasil dibuat
+
+note over Admin, db
+  **Keterangan:**
+  - Sistem otomatis menghitung jumlah hari dan total biaya
+  - Status transaksi: aktif (mulai) atau selesai
+  - Status mobil: tersedia atau sedang disewa
+  - Supir bersifat opsional (lepas kunci)
+end note
+
+@enduml

@@ -1,0 +1,47 @@
+@startuml SequenceDiagram_Mobil_Merk_Simple
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 10
+
+actor Admin
+participant "Sistem" as sistem
+database "Database" as db
+
+title Sequence Diagram Sederhana - Data Mobil dan Merk
+
+== Kelola Data Merk ==
+Admin -> sistem : Buka halaman merk
+sistem -> db : Ambil data merk
+db --> sistem : Daftar merk
+sistem --> Admin : Tampilkan daftar merk
+
+Admin -> sistem : Tambah/Ubah/Hapus merk
+sistem -> db : Simpan perubahan
+db --> sistem : Berhasil
+sistem --> Admin : Data merk berhasil diperbarui
+
+== Kelola Data Mobil ==
+Admin -> sistem : Buka halaman mobil
+sistem -> db : Ambil data mobil dan merk
+db --> sistem : Daftar mobil
+sistem --> Admin : Tampilkan daftar mobil
+
+Admin -> sistem : Tambah/Ubah mobil
+sistem -> db : Ambil daftar merk
+db --> sistem : Daftar merk
+sistem --> Admin : Tampilkan form dengan pilihan merk
+
+Admin -> sistem : Isi data mobil dan simpan
+sistem -> db : Simpan data mobil
+db --> sistem : Berhasil
+sistem --> Admin : Data mobil berhasil disimpan
+
+note over Admin, db
+  **Keterangan:**
+  - Setiap mobil harus memiliki satu merk
+  - Admin dapat menambah, mengubah, atau menghapus data
+  - Data merk: nama merk
+  - Data mobil: plat, nama, merk, warna, tahun, status, foto
+end note
+
+@enduml

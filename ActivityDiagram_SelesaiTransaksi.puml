@@ -1,0 +1,32 @@
+@startuml ActivityDiagram_SelesaiTransaksi_Simple
+
+skinparam activityBackgroundColor LightGreen
+skinparam activityBorderColor DarkGreen
+skinparam activityDiamondBackgroundColor LightYellow
+skinparam activityDiamondBorderColor Orange
+
+title Activity Diagram Sederhana - Selesaikan Transaksi
+
+start
+
+:Admin buka halaman transaksi;
+
+:Admin klik tombol selesai
+pada transaksi aktif;
+
+if (Admin konfirmasi?) then (tidak)
+  :Batal;
+  stop
+else (ya)
+  :Ubah status transaksi
+  menjadi selesai;
+  
+  :Ubah status mobil
+  menjadi tersedia;
+  
+  :Tampilkan pesan berhasil;
+  
+  stop
+endif
+
+@enduml

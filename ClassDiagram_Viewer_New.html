@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Diagram - Sistem Rental Mobil</title>
+    <script src="https://cdn.jsdelivr.net/npm/plantuml-browser@1.0.0/dist/plantuml.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .diagram-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .diagram-section h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        #diagram {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        #diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .info-section {
+            background: #fff;
+            border-left: 4px solid #2a5298;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .info-section h3 {
+            color: #2a5298;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        
+        .info-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .info-section li {
+            padding: 6px 0;
+            padding-left: 22px;
+            position: relative;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .info-section li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #2a5298;
+            font-weight: bold;
+        }
+        
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .class-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        
+        .class-card:hover {
+            border-color: #2a5298;
+            box-shadow: 0 4px 15px rgba(42, 82, 152, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .class-card h4 {
+            color: #2a5298;
+            margin-bottom: 8px;
+            font-size: 16px;
+            border-bottom: 2px solid #2a5298;
+            padding-bottom: 6px;
+        }
+        
+        .class-card p {
+            color: #6c757d;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .class-card ul {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .note-box strong {
+            color: #856404;
+        }
+        
+        .note-box code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 13px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            margin: 5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin: 2px;
+        }
+        
+        .badge-primary { background: #3498db; color: white; }
+        .badge-success { background: #27ae60; color: white; }
+        .badge-warning { background: #f39c12; color: white; }
+        .badge-info { background: #16a085; color: white; }
+        
+        @media (max-width: 768px) {
+            .content { padding: 15px; }
+            .classes-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Class Diagram</h1>
+            <p>Sistem Rental Mobil - Struktur Kelas dan Relasi Data</p>
+        </div>
+        
+        <div class="content">
+            <div class="diagram-section">
+                <h2>🔗 Diagram Kelas</h2>
+                <div id="diagram"></div>
+                <div class="note-box">
+                    <strong>💡 Cara Menampilkan:</strong>
+                    Jika diagram tidak muncul, pastikan koneksi internet aktif untuk memuat library PlantUML.
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h3>📋 Deskripsi Class Diagram</h3>
+                <p>Class Diagram ini menggambarkan struktur lengkap sistem rental mobil berdasarkan analisis model dan database:</p>
+            </div>
+            
+            <div class="classes-grid">
+                <div class="class-card">
+                    <h4>👤 User</h4>
+                    <p>Mengelola data pengguna sistem untuk autentikasi login.</p>
+                    <ul>
+                        <li>iduser (PK)</li>
+                        <li>username, password</li>
+                        <li>lastlogin, stuser</li>
+                    </ul>
+                </div>
+                
+                <div class="class-card">
+                    <h4>⭐ Merk</h4>
+                    <p>Mengelola data merk mobil (Toyota, Honda, Daihatsu, dll).</p>
+                    <ul>
+                        <li>idmerk (PK)</li>
+                        <li>namamerk</li>
+                        <li>namamerk_seo</li>
+                    </ul>
+                </div>
+                
+                <div class="class-card">
+                    <h4>🚗 Mobil</h4>
+                    <p>Mengelola data mobil rental dengan status ketersediaan.</p>
+                    <ul>
+                        <li>idmobil (PK), idmerk (FK)</li>
+                        <li>type, tahunproduksi</li>
+                        <li>platnomer, kursi</li>
+                        <li>tarif, lembur</li>
+                        <li><span class="status-badge badge-warning">stmobil: bebas/jalan</span></li>
+                    </ul>
+                </div>
+                
+                <div class="class-card">
+                    <h4>👨‍✈️ Supir</h4>
+                    <p>Mengelola data supir dengan tarif harian dan lembur.</p>
+                    <ul>
+                        <li>idsupir (PK)</li>
+                        <li>namasupir, tgllahir</li>
+                        <li>alamat, noktp</li>
+                        <li>tarif, lembur</li>
+                    </ul>
+                </div>
+                
+                <div class="class-card">
+                    <h4>📝 Transaksi</h4>
+                    <p>Mengelola transaksi rental mobil dengan perhitungan otomatis.</p>
+                    <ul>
+                        <li>idtransaksi (PK)</li>
+                        <li>idmobil (FK), idsupir (FK)</li>
+                        <li>namapelanggan, noktp, nohp</li>
+                        <li>tglsewa, tglkembali, selisih</li>
+                        <li>total</li>
+                        <li><span class="status-badge badge-success">sttransaksi: mulai/selesai</span></li>
+                    </ul>
+                </div>
+                
+                <div class="class-card">
+                    <h4>📊 Manager</h4>
+                    <p>Kelas khusus untuk dashboard, laporan, dan statistik.</p>
+                    <ul>
+                        <li>getStatistik()</li>
+                        <li>getMobilTersedia()</li>
+                        <li>getMobilJalan()</li>
+                        <li>getLaporanTransaksi()</li>
+                        <li>getGrafikBulanan()</li>
+                        <li>getMobilPopuler()</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-section" style="margin-top: 20px;">
+                <h3>🔗 Relasi Antar Kelas</h3>
+                <ul>
+                    <li><strong>Merk → Mobil:</strong> Relasi <span class="status-badge badge-primary">1:*</span> (Satu merk dapat memiliki banyak mobil)</li>
+                    <li><strong>Mobil → Transaksi:</strong> Relasi <span class="status-badge badge-primary">1:*</span> (Satu mobil dapat disewa berkali-kali)</li>
+                    <li><strong>Supir → Transaksi:</strong> Relasi <span class="status-badge badge-info">0..1:*</span> (Transaksi opsional menggunakan supir)</li>
+                </ul>
+            </div>
+            
+            <div class="info-section">
+                <h3>📌 Catatan Penting</h3>
+                <ul>
+                    <li><strong>Status Mobil:</strong> <code>bebas</code> (tersedia) atau <code>jalan</code> (sedang disewa)</li>
+                    <li><strong>Status Transaksi:</strong> <code>mulai</code> (aktif) atau <code>selesai</code> (sudah dikembalikan)</li>
+                    <li><strong>Lepas Kunci:</strong> idsupir = 0 atau kosong untuk transaksi tanpa supir</li>
+                    <li><strong>Perhitungan Total:</strong> (tarif mobil × selisih hari) + (tarif supir × selisih hari)</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="ClassDiagram_New.puml" class="btn" download>
+                    📥 Download PlantUML
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Class Diagram - Sistem Rental Mobil © 2024</p>
+            <p>Generated from Model Classes Analysis</p>
+        </div>
+    </div>
+    
+    <script>
+        // PlantUML source code
+        var uml = `
+@startuml ClassDiagram_RentalMobil
+
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam backgroundColor #F8F9FA
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor #2C3E50
+    ArrowColor #3498DB
+    FontSize 11
+    FontName Calibri
+    AttributeFontSize 10
+    HeaderBackgroundColor #3498DB
+    HeaderFontColor white
+}
+
+skinparam stereotypeCBackgroundColor #E8F6F3
+skinparam note {
+    BackgroundColor #FFF9E6
+    BorderColor #F39C12
+    FontSize 10
+}
+
+class User {
+    **PK** iduser : int
+    username : varchar(20)
+    password : varchar(50)
+    lastlogin : datetime
+    stuser : int
+    __
+    + cek_login() : bool
+    + authenticate() : User
+}
+
+class Merk {
+    **PK** idmerk : int
+    namamerk : varchar(100)
+    namamerk_seo : varchar(100)
+    __
+    + GetMerk() : array
+    + GetData() : Merk
+    + insert() : bool
+    + delete() : bool
+}
+
+class Mobil {
+    **PK** idmobil : int
+    **FK** idmerk : int
+    date : datetime
+    type : varchar(20)
+    tahunproduksi : int
+    platnomer : varchar(15)
+    kursi : int
+    tarif : int
+    lembur : int
+    norangka : varchar(20)
+    foto : varchar(200)
+    update : datetime
+    stmobil : enum
+    __
+    + GetMobil() : array
+    + GetData() : Mobil
+    + getMerk() : array
+    + insert() : bool
+    + delete() : bool
+}
+
+class Supir {
+    **PK** idsupir : int
+    date : datetime
+    namasupir : varchar(30)
+    tgllahir : date
+    alamat : varchar(200)
+    noktp : varchar(100)
+    foto : varchar(100)
+    tarif : int
+    lembur : int
+    __
+    + Getsupir() : array
+    + GetData() : Supir
+    + insert() : bool
+    + delete() : bool
+}
+
+class Transaksi {
+    **PK** idtransaksi : int
+    **FK** idmobil : int
+    **FK** idsupir : int
+    date : datetime
+    namapelanggan : varchar(20)
+    noktp : varchar(20)
+    nohp : varchar(20)
+    alamat : varchar(100)
+    tglsewa : date
+    tglkembali : date
+    selisih : int
+    total : int
+    sttransaksi : enum
+    __
+    + Gettransaksi() : array
+    + GetData() : Transaksi
+    + getMobil() : array
+    + getSupir() : array
+    + getAllMobil() : array
+    + insert() : bool
+    + delete() : bool
+    + updatest() : bool
+}
+
+class Manager {
+    + getStatistik() : array
+    + getMobilTersedia() : array
+    + getMobilJalan() : array
+    + getStatistikMobil() : array
+    + getLaporanTransaksi() : array
+    + getDetailTransaksi() : Transaksi
+    + getStatistikLengkap() : array
+    + getGrafikBulanan() : array
+    + getMobilPopuler() : array
+}
+
+Merk "1" -- "*" Mobil : memiliki
+Mobil "1" -- "*" Transaksi : disewa dalam
+Supir "0..1" -- "*" Transaksi : mengendarai
+Mobil .> Manager
+Transaksi .> Manager
+
+@enduml
+`;
+
+        // Render the diagram
+        plantuml.render(uml, {
+            format: 'svg',
+            onError: function(error) {
+                console.error('Error rendering diagram:', error);
+                document.getElementById('diagram').innerHTML = 
+                    '<div class="note-box"><strong>Error:</strong> Gagal merender diagram. Silakan coba lagi atau gunakan PlantUML viewer online.</div>';
+            }
+        }).then(function(svg) {
+            document.getElementById('diagram').innerHTML = svg;
+        }).catch(function(error) {
+            console.error('Error:', error);
+            document.getElementById('diagram').innerHTML = 
+                '<div class="note-box"><strong>Error:</strong> Gagal merender diagram. Silakan coba lagi.</div>';
+        });
+    </script>
+</body>
+</html>

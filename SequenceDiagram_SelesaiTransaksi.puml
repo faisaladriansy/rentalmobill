@@ -1,0 +1,32 @@
+@startuml SequenceDiagram_SelesaiTransaksi_Simple
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 10
+
+actor Admin
+participant "Sistem" as sistem
+database "Database" as db
+
+title Sequence Diagram Sederhana - Selesaikan Transaksi
+
+== Selesaikan Transaksi ==
+Admin -> sistem : Klik tombol selesai
+note right of Admin
+  Transaksi yang diselesaikan:
+  - Status: aktif (mulai)
+  - Mobil sudah dikembalikan
+  - Pelanggan sudah membayar
+end note
+sistem -> db : Ubah status transaksi menjadi selesai
+sistem -> db : Ubah status mobil menjadi tersedia
+db --> sistem : Berhasil
+sistem --> Admin : Transaksi selesai
+
+note over Admin, db
+  **Keterangan:**
+  - Status transaksi berubah dari aktif menjadi selesai
+  - Status mobil berubah dari sedang disewa menjadi tersedia
+  - Mobil dapat disewa kembali oleh pelanggan lain
+end note
+
+@enduml

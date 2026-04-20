@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Case Diagram - PlantUML Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .error-box {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .error-box h3 {
+            color: #d32f2f;
+            margin: 0 0 15px 0;
+        }
+        
+        .fix-box {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .fix-box h3 {
+            color: #2e7d32;
+            margin: 0 0 15px 0;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .original-code {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .fixed-code {
+            background: #e8f5e8;
+            border-color: #4caf50;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            margin: 20px 0;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            background: #f5f5f5;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px 0;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 PlantUML Use Case Diagram - Error Fix</h1>
+            <p>Perbaikan Syntax Error dalam Use Case Diagram</p>
+        </div>
+        
+        <div class="content">
+            <div class="error-box">
+                <h3>❌ Error yang Ditemukan:</h3>
+                <ul>
+                    <li><strong>Missing spaces:</strong> Tidak ada spasi antara elemen</li>
+                    <li><strong>Wrong syntax:</strong> <code>--((</code> seharusnya <code>--></code></li>
+                    <li><strong>Incorrect relationship:</strong> <code>..></code> untuk include/extend</li>
+                    <li><strong>Missing @startuml/@enduml:</strong> Tag pembuka dan penutup</li>
+                    <li><strong>Formatting issues:</strong> Struktur kode tidak rapi</li>
+                </ul>
+            </div>
+            
+            <div class="comparison">
+                <div>
+                    <h3>🚫 Kode Original (Error):</h3>
+                    <div class="code-block original-code">useCaseDiagramactor "Customer" as Cactor "Admin" as Apackage "Sistem Rental Mobil" {usecase "Login" as UC4usecase "Cek Ketersediaan & Hitung Biaya" as UC_Checkusecase "Buat Transaksi Baru" as UC1usecase "Proses Sewa (Update Status)" as UC_Processusecase "Cetak Invoice" as UC_Print}C --( UC1A --( UC_ProcessUC1 ..> UC4 : <<include>>UC1 ..> UC_Check : <<include>>UC_Process ..> UC_Print : <<include>>UC_Process ..> UC1 : <<extend>></div>
+                </div>
+                
+                <div>
+                    <h3>✅ Kode Fixed (Benar):</h3>
+                    <div class="code-block fixed-code">@startuml UseCase_Simple
+
+actor "Customer" as C
+actor "Admin" as A
+
+package "Sistem Rental Mobil" {
+    usecase "Login" as UC4
+    usecase "Cek Ketersediaan & Hitung Biaya" as UC_Check
+    usecase "Buat Transaksi Baru" as UC1
+    usecase "Proses Sewa (Update Status)" as UC_Process
+    usecase "Cetak Invoice" as UC_Print
+}
+
+C --> UC1 : "Request sewa"
+A --> UC_Process : "Kelola transaksi"
+
+UC1 .> UC4 : <<include>>
+UC1 .> UC_Check : <<include>>
+UC_Process .> UC_Print : <<include>>
+UC_Process .> UC1 : <<extend>>
+
+@enduml</div>
+                </div>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('simple')">Simple Version</button>
+                <button class="tab" onclick="showTab('complete')">Complete Version</button>
+                <button class="tab" onclick="showTab('explanation')">Penjelasan Error</button>
+            </div>
+            
+            <div id="simple" class="tab-content active">
+                <h3>📋 Simple Use Case Diagram (Fixed)</h3>
+                <div class="code-block fixed-code">
+@startuml UseCase_Simple
+
+' Actors
+actor "Customer" as C
+actor "Admin" as A
+
+' System Package
+package "Sistem Rental Mobil" {
+    usecase "Login" as UC4
+    usecase "Cek Ketersediaan & Hitung Biaya" as UC_Check
+    usecase "Buat Transaksi Baru" as UC1
+    usecase "Proses Sewa (Update Status)" as UC_Process
+    usecase "Cetak Invoice" as UC_Print
+}
+
+' Actor Relationships
+C --> UC1 : "Request sewa"
+A --> UC_Process : "Kelola transaksi"
+
+' Include Relationships
+UC1 .> UC4 : <<include>>
+UC1 .> UC_Check : <<include>>
+UC_Process .> UC_Print : <<include>>
+
+' Extend Relationships
+UC_Process .> UC1 : <<extend>>
+
+@enduml
+                </div>
+            </div>
+            
+            <div id="complete" class="tab-content">
+                <h3>🚗 Complete Use Case Diagram</h3>
+                <div class="code-block fixed-code">
+@startuml UseCase_Rental_Mobil
+
+!theme plain
+skinparam backgroundColor #f8f9fa
+
+' Actors
+actor "Customer" as C
+actor "Admin" as A
+actor "Supir" as S
+
+' System Package
+package "Sistem Rental Mobil" {
+    ' Authentication
+    usecase "Login" as UC_Login
+    
+    ' Core Functions
+    usecase "Cek Ketersediaan & Hitung Biaya" as UC_Check
+    usecase "Buat Transaksi Baru" as UC_Create
+    usecase "Proses Sewa (Update Status)" as UC_Process
+    usecase "Cetak Invoice" as UC_Print
+    
+    ' Data Management
+    usecase "Kelola Data Mobil" as UC_Mobil
+    usecase "Kelola Data Merk" as UC_Merk
+    usecase "Kelola Data Supir" as UC_Supir
+    
+    ' Transaction Management
+    usecase "Edit Transaksi" as UC_Edit
+    usecase "Selesaikan Transaksi" as UC_Complete
+    
+    ' Reports
+    usecase "Lihat Laporan" as UC_Report
+    usecase "Export Data" as UC_Export
+}
+
+' Actor Relationships
+C --> UC_Create : "Minta sewa mobil"
+A --> UC_Login : "Masuk sistem"
+A --> UC_Check : "Cek ketersediaan"
+A --> UC_Create : "Input data customer"
+A --> UC_Process : "Proses transaksi"
+A --> UC_Print : "Cetak invoice"
+A --> UC_Mobil : "Kelola mobil"
+A --> UC_Merk : "Kelola merk"
+A --> UC_Supir : "Kelola supir"
+A --> UC_Edit : "Edit transaksi"
+A --> UC_Complete : "Selesaikan sewa"
+A --> UC_Report : "Lihat laporan"
+A --> UC_Export : "Export data"
+
+S --> UC_Process : "Terima kendaraan"
+
+' Include Relationships
+UC_Create ..> UC_Login : <<include>>
+UC_Create ..> UC_Check : <<include>>
+UC_Process ..> UC_Print : <<include>>
+UC_Edit ..> UC_Login : <<include>>
+UC_Complete ..> UC_Print : <<include>>
+
+' Extend Relationships
+UC_Process ..> UC_Create : <<extend>>
+UC_Complete ..> UC_Process : <<extend>>
+
+@enduml
+                </div>
+            </div>
+            
+            <div id="explanation" class="tab-content">
+                <h3>🔍 Penjelasan Error dan Perbaikan</h3>
+                
+                <h4>1. Missing @startuml/@enduml Tags</h4>
+                <p><strong>Error:</strong> Tidak ada tag pembuka dan penutup</p>
+                <p><strong>Fix:</strong> Tambahkan <code>@startuml</code> di awal dan <code>@enduml</code> di akhir</p>
+                
+                <h4>2. Missing Spaces</h4>
+                <p><strong>Error:</strong> <code>useCaseDiagramactor</code> - tidak ada spasi</p>
+                <p><strong>Fix:</strong> <code>actor "Customer" as C</code> - dengan spasi yang proper</p>
+                
+                <h4>3. Wrong Relationship Syntax</h4>
+                <p><strong>Error:</strong> <code>C --( UC1</code> - syntax salah</p>
+                <p><strong>Fix:</strong> <code>C --> UC1</code> - menggunakan panah yang benar</p>
+                
+                <h4>4. Include/Extend Relationships</h4>
+                <p><strong>Correct syntax:</strong></p>
+                <ul>
+                    <li><code>UC1 .> UC4 : <<include>></code> - untuk include</li>
+                    <li><code>UC_Process .> UC1 : <<extend>></code> - untuk extend</li>
+                </ul>
+                
+                <h4>5. Proper Formatting</h4>
+                <p>Gunakan line breaks dan indentasi yang proper untuk readability</p>
+            </div>
+            
+            <div class="fix-box">
+                <h3>✅ Cara Menggunakan:</h3>
+                <ol>
+                    <li><strong>Copy kode yang sudah diperbaiki</strong> dari tab di atas</li>
+                    <li><strong>Paste ke PlantUML editor</strong> seperti:
+                        <ul>
+                            <li><a href="http://www.plantuml.com/plantuml/uml/" target="_blank" class="btn">PlantUML Online</a></li>
+                            <li><a href="https://plantuml-editor.kkeisuke.com/" target="_blank" class="btn">PlantUML Editor</a></li>
+                        </ul>
+                    </li>
+                    <li><strong>Generate diagram</strong> untuk melihat hasilnya</li>
+                    <li><strong>Export</strong> dalam format PNG, SVG, atau PDF</li>
+                </ol>
+            </div>
+            
+            <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3>💡 Tips PlantUML:</h3>
+                <ul>
+                    <li><strong>Actors:</strong> <code>actor "Name" as Alias</code></li>
+                    <li><strong>Use Cases:</strong> <code>usecase "Name" as Alias</code></li>
+                    <li><strong>Associations:</strong> <code>Actor --> UseCase</code></li>
+                    <li><strong>Include:</strong> <code>UseCase1 .> UseCase2 : <<include>></code></li>
+                    <li><strong>Extend:</strong> <code>UseCase1 .> UseCase2 : <<extend>></code></li>
+                    <li><strong>Comments:</strong> <code>' This is a comment</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

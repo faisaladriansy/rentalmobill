@@ -1,0 +1,45 @@
+@startuml ActivityDiagram_Supir_Simple
+
+skinparam activityBackgroundColor LightPink
+skinparam activityBorderColor DarkRed
+skinparam activityDiamondBackgroundColor LightYellow
+skinparam activityDiamondBorderColor Orange
+
+title Activity Diagram Sederhana - Kelola Data Supir
+
+start
+
+:Admin buka halaman Supir;
+
+:Sistem tampilkan daftar supir;
+
+if (Pilih aksi?) then (Tambah/Ubah)
+  :Admin isi form data supir;
+  
+  if (Data valid?) then (tidak)
+    :Tampilkan pesan error;
+    stop
+  else (ya)
+    :Simpan data supir;
+    
+    :Tampilkan pesan berhasil;
+    
+    stop
+  endif
+  
+else (Hapus)
+  :Admin klik tombol hapus;
+  
+  if (Admin konfirmasi?) then (tidak)
+    :Batal;
+    stop
+  else (ya)
+    :Hapus data supir;
+    
+    :Tampilkan pesan berhasil;
+    
+    stop
+  endif
+endif
+
+@enduml

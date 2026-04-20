@@ -1,0 +1,52 @@
+@startuml ActivityDiagram_Mobil
+
+skinparam backgroundColor White
+skinparam activityBackgroundColor White
+skinparam activityBorderColor Black
+skinparam activityBorderThickness 1.5
+skinparam activityDiamondBackgroundColor White
+skinparam activityDiamondBorderColor Black
+skinparam activityFontSize 13
+skinparam activityArrowColor Black
+skinparam swimlaneBorderColor Black
+skinparam swimlaneBorderThickness 1.5
+
+title Activity Diagram - Mengelola Data Mobil
+
+|Admin|
+start
+
+:Admin Login Sistem;
+
+|Sistem|
+:Sistem Menampilkan
+Halaman Utama;
+
+|Admin|
+:Admin Memilih
+Menu Data Mobil;
+
+|Sistem|
+:Menampilkan Daftar
+Data Mobil;
+
+|Admin|
+:Memilih Mobil;
+
+if (Pilih Aksi?) then
+  -> Edit Mobil;
+  :Edit Data Mobil;
+else
+  -> Tambah Mobil;
+  :Tambah Data Mobil Baru;
+endif
+
+|Sistem|
+:Menyimpan Data Mobil;
+
+:Menampilkan Notifikasi
+Berhasil;
+
+stop
+
+@enduml

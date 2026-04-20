@@ -1,0 +1,68 @@
+@startuml ActivityDiagram_TransaksiBaru
+
+skinparam backgroundColor White
+skinparam activityBackgroundColor White
+skinparam activityBorderColor Black
+skinparam activityBorderThickness 1.5
+skinparam activityDiamondBackgroundColor White
+skinparam activityDiamondBorderColor Black
+skinparam activityFontSize 13
+skinparam activityArrowColor Black
+skinparam swimlaneBorderColor Black
+skinparam swimlaneBorderThickness 1.5
+
+title Activity Diagram - Membuat Transaksi Baru
+
+|Admin|
+start
+
+:Admin Login Sistem;
+
+|Sistem|
+:Sistem Menampilkan
+Halaman Utama;
+
+|Admin|
+:Admin Memilih
+Menu Transaksi;
+
+|Sistem|
+:Menampilkan Daftar
+Transaksi;
+
+|Admin|
+:Admin Klik
+Tambah Transaksi;
+
+|Sistem|
+:Menampilkan Form
+Transaksi Baru;
+
+|Admin|
+:Admin Mengisi
+Data Transaksi;
+
+|Sistem|
+:Sistem Memvalidasi Data;
+
+if (Data Valid?) then
+  -> Tidak Valid;
+  :Menampilkan Pesan Error;
+
+  |Admin|
+  :Ulangi Isi Form;
+
+  |Sistem|
+else
+  -> Valid;
+  :Menyimpan Data Transaksi;
+  :Update Status Mobil
+  Menjadi Jalan;
+endif
+
+:Menampilkan Notifikasi
+Transaksi Berhasil;
+
+stop
+
+@enduml

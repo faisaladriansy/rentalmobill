@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .actor-box { fill: #f8f9fa; stroke: #2c3e50; stroke-width: 2; }
+      .actor-text { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; text-anchor: middle; }
+      .system-boundary { fill: none; stroke: #34495e; stroke-width: 3; stroke-dasharray: 10,5; }
+      .system-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #2c3e50; }
+      .usecase-primary { fill: #ffe6e6; stroke: #e74c3c; stroke-width: 2; }
+      .usecase-secondary { fill: #fff3e0; stroke: #f39c12; stroke-width: 2; }
+      .usecase-normal { fill: #e8f5e8; stroke: #27ae60; stroke-width: 2; }
+      .usecase-text { font-family: Arial, sans-serif; font-size: 11px; fill: #2c3e50; text-anchor: middle; }
+      .relation-line { stroke: #7f8c8d; stroke-width: 2; fill: none; }
+      .include-line { stroke: #3498db; stroke-width: 2; fill: none; stroke-dasharray: 5,5; }
+      .extend-line { stroke: #9b59b6; stroke-width: 2; fill: none; stroke-dasharray: 3,3; }
+      .relation-text { font-family: Arial, sans-serif; font-size: 10px; fill: #7f8c8d; text-anchor: middle; }
+      .title-text { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #2c3e50; text-anchor: middle; }
+      .subtitle-text { font-family: Arial, sans-serif; font-size: 16px; fill: #7f8c8d; text-anchor: middle; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#ecf0f1"/>
+  
+  <!-- Title -->
+  <text x="600" y="30" class="title-text">Use Case Diagram</text>
+  <text x="600" y="50" class="subtitle-text">Sistem Rental Mobil</text>
+  
+  <!-- System Boundary -->
+  <rect x="200" y="100" width="800" height="600" class="system-boundary" rx="20"/>
+  <text x="220" y="90" class="system-title">📱 Sistem Rental Mobil</text>
+  
+  <!-- Actors -->
+  
+  <!-- Admin Actor -->
+  <g id="admin-actor">
+    <rect x="50" y="150" width="100" height="120" class="actor-box" rx="10"/>
+    <circle cx="100" cy="180" r="15" fill="#3498db"/>
+    <line x1="100" y1="195" x2="100" y2="230" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="85" y1="210" x2="115" y2="210" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="100" y1="230" x2="85" y2="255" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="100" y1="230" x2="115" y2="255" stroke="#2c3e50" stroke-width="3"/>
+    <text x="100" y="275" class="actor-text">Admin Rental</text>
+  </g>
+  
+  <!-- Customer Actor -->
+  <g id="customer-actor">
+    <rect x="1050" y="200" width="100" height="120" class="actor-box" rx="10"/>
+    <circle cx="1100" cy="230" r="15" fill="#e74c3c"/>
+    <line x1="1100" y1="245" x2="1100" y2="280" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="1085" y1="260" x2="1115" y2="260" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="1100" y1="280" x2="1085" y2="305" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="1100" y1="280" x2="1115" y2="305" stroke="#2c3e50" stroke-width="3"/>
+    <text x="1100" y="325" class="actor-text">Customer</text>
+  </g>
+  
+  <!-- Supir Actor -->
+  <g id="supir-actor">
+    <rect x="50" y="400" width="100" height="120" class="actor-box" rx="10"/>
+    <circle cx="100" cy="430" r="15" fill="#f39c12"/>
+    <line x1="100" y1="445" x2="100" y2="480" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="85" y1="460" x2="115" y2="460" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="100" y1="480" x2="85" y2="505" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="100" y1="480" x2="115" y2="505" stroke="#2c3e50" stroke-width="3"/>
+    <text x="100" y="525" class="actor-text">Supir</text>
+  </g>
+  
+  <!-- Manager Actor -->
+  <g id="manager-actor">
+    <rect x="1050" y="450" width="100" height="120" class="actor-box" rx="10"/>
+    <circle cx="1100" cy="480" r="15" fill="#9c27b0"/>
+    <line x1="1100" y1="495" x2="1100" y2="530" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="1085" y1="510" x2="1115" y2="510" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="1100" y1="530" x2="1085" y2="555" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="1100" y1="530" x2="1115" y2="555" stroke="#2c3e50" stroke-width="3"/>
+    <text x="1100" y="575" class="actor-text">Manager</text>
+  </g>
+  
+  <!-- Use Cases -->
+  
+  <!-- Primary Use Cases (Core Functions) -->
+  <ellipse cx="350" cy="180" rx="80" ry="30" class="usecase-primary"/>
+  <text x="350" y="185" class="usecase-text">Kelola Data</text>
+  <text x="350" y="195" class="usecase-text">Transaksi</text>
+  
+  <ellipse cx="550" cy="180" rx="80" ry="30" class="usecase-primary"/>
+  <text x="550" y="185" class="usecase-text">Kelola Data</text>
+  <text x="550" y="195" class="usecase-text">Mobil</text>
+  
+  <ellipse cx="750" cy="180" rx="80" ry="30" class="usecase-primary"/>
+  <text x="750" y="185" class="usecase-text">Kelola Data</text>
+  <text x="750" y="195" class="usecase-text">Merk</text>
+  
+  <ellipse cx="850" cy="250" rx="80" ry="30" class="usecase-primary"/>
+  <text x="850" y="255" class="usecase-text">Kelola Data</text>
+  <text x="850" y="265" class="usecase-text">Supir</text>
+  
+  <!-- Secondary Use Cases (Transaction Operations) -->
+  <ellipse cx="300" cy="300" rx="75" ry="25" class="usecase-secondary"/>
+  <text x="300" y="305" class="usecase-text">Tambah Transaksi</text>
+  
+  <ellipse cx="450" cy="300" rx="75" ry="25" class="usecase-secondary"/>
+  <text x="450" y="305" class="usecase-text">Edit Transaksi</text>
+  
+  <ellipse cx="600" cy="300" rx="75" ry="25" class="usecase-secondary"/>
+  <text x="600" y="305" class="usecase-text">Selesaikan</text>
+  <text x="600" y="315" class="usecase-text">Transaksi</text>
+  
+  <ellipse cx="750" cy="300" rx="75" ry="25" class="usecase-secondary"/>
+  <text x="750" y="305" class="usecase-text">Update Status</text>
+  <text x="750" y="315" class="usecase-text">Mobil</text>
+  
+  <!-- Normal Use Cases (Support Functions) -->
+  <ellipse cx="350" cy="400" rx="70" ry="25" class="usecase-normal"/>
+  <text x="350" y="405" class="usecase-text">Login/Logout</text>
+  
+  <ellipse cx="500" cy="400" rx="70" ry="25" class="usecase-normal"/>
+  <text x="500" y="405" class="usecase-text">Lihat Laporan</text>
+  
+  <ellipse cx="650" cy="400" rx="70" ry="25" class="usecase-normal"/>
+  <text x="650" y="405" class="usecase-text">Cari Data</text>
+  
+  <ellipse cx="800" cy="400" rx="70" ry="25" class="usecase-normal"/>
+  <text x="800" y="405" class="usecase-text">Cetak Invoice</text>
+  
+  <ellipse cx="450" cy="500" rx="75" ry="25" class="usecase-normal"/>
+  <text x="450" y="500" class="usecase-text">Pantau Keluar</text>
+  <text x="450" y="510" class="usecase-text">Masuk Mobil</text>
+  
+  <ellipse cx="650" cy="500" rx="70" ry="25" class="usecase-normal"/>
+  <text x="650" y="505" class="usecase-text">Export Data</text>
+  
+  <ellipse cx="850" cy="500" rx="75" ry="25" class="usecase-normal"/>
+  <text x="850" y="500" class="usecase-text">Dashboard</text>
+  <text x="850" y="510" class="usecase-text">Statistik</text>
+  
+  <!-- Relations from Admin to Use Cases -->
+  <line x1="150" y1="200" x2="270" y2="180" class="relation-line"/>
+  <line x1="150" y1="205" x2="470" y2="180" class="relation-line"/>
+  <line x1="150" y1="210" x2="670" y2="180" class="relation-line"/>
+  <line x1="150" y1="215" x2="770" y2="250" class="relation-line"/>
+  
+  <line x1="150" y1="230" x2="225" y2="300" class="relation-line"/>
+  <line x1="150" y1="235" x2="375" y2="300" class="relation-line"/>
+  <line x1="150" y1="240" x2="525" y2="300" class="relation-line"/>
+  <line x1="150" y1="245" x2="675" y2="300" class="relation-line"/>
+  
+  <line x1="150" y1="260" x2="280" y2="400" class="relation-line"/>
+  <line x1="150" y1="265" x2="430" y2="400" class="relation-line"/>
+  <line x1="150" y1="270" x2="580" y2="400" class="relation-line"/>
+  <line x1="150" y1="275" x2="730" y2="400" class="relation-line"/>
+  
+  <!-- Relations from Customer (indirect) -->
+  <line x1="1050" y1="250" x2="375" y2="300" class="relation-line" stroke-dasharray="8,4"/>
+  <line x1="1050" y1="280" x2="675" y2="300" class="relation-line" stroke-dasharray="8,4"/>
+  
+  <!-- Relations from Supir (indirect) -->
+  <line x1="150" y1="450" x2="375" y2="300" class="relation-line" stroke-dasharray="8,4"/>
+  <line x1="150" y1="470" x2="675" y2="300" class="relation-line" stroke-dasharray="8,4"/>
+  
+  <!-- Relations from Manager (monitoring only) -->
+  <line x1="1050" y1="500" x2="570" y2="400" class="relation-line" stroke-dasharray="5,3" stroke="#9c27b0"/>
+  <line x1="1050" y1="510" x2="525" y2="500" class="relation-line" stroke-dasharray="5,3" stroke="#9c27b0"/>
+  <line x1="1050" y1="520" x2="720" y2="500" class="relation-line" stroke-dasharray="5,3" stroke="#9c27b0"/>
+  <line x1="1050" y1="530" x2="925" y2="500" class="relation-line" stroke-dasharray="5,3" stroke="#9c27b0"/>
+  
+  <!-- Include Relations -->
+  <line x1="300" y1="275" x2="350" y2="205" class="include-line"/>
+  <text x="320" y="235" class="relation-text">«include»</text>
+  
+  <line x1="450" y1="275" x2="350" y2="205" class="include-line"/>
+  <text x="395" y="235" class="relation-text">«include»</text>
+  
+  <line x1="600" y1="275" x2="350" y2="205" class="include-line"/>
+  <text x="470" y="235" class="relation-text">«include»</text>
+  
+  <line x1="750" y1="275" x2="550" y2="205" class="include-line"/>
+  <text x="645" y="235" class="relation-text">«include»</text>
+  
+  <!-- Extend Relations -->
+  <line x1="300" y1="325" x2="550" y2="205" class="extend-line"/>
+  <text x="420" y="270" class="relation-text">«extend»</text>
+  
+  <line x1="300" y1="325" x2="850" y2="275" class="extend-line"/>
+  <text x="570" y="300" class="relation-text">«extend»</text>
+  
+  <!-- Legend -->
+  <g id="legend">
+    <rect x="220" y="620" width="760" height="70" fill="white" stroke="#bdc3c7" stroke-width="1" rx="5"/>
+    <text x="240" y="635" class="system-title">Legend:</text>
+    
+    <!-- Primary Use Cases -->
+    <ellipse cx="270" cy="650" rx="25" ry="10" class="usecase-primary"/>
+    <text x="305" y="655" class="relation-text">Primary Use Cases (Core Functions)</text>
+    
+    <!-- Secondary Use Cases -->
+    <ellipse cx="470" cy="650" rx="25" ry="10" class="usecase-secondary"/>
+    <text x="505" y="655" class="relation-text">Secondary Use Cases (Operations)</text>
+    
+    <!-- Normal Use Cases -->
+    <ellipse cx="670" cy="650" rx="25" ry="10" class="usecase-normal"/>
+    <text x="705" y="655" class="relation-text">Support Use Cases (Utilities)</text>
+    
+    <!-- Relations -->
+    <line x1="240" y1="670" x2="280" y2="670" class="relation-line"/>
+    <text x="290" y="675" class="relation-text">Direct Association</text>
+    
+    <line x1="400" y1="670" x2="440" y2="670" class="include-line"/>
+    <text x="450" y="675" class="relation-text">«include» Relationship</text>
+    
+    <line x1="580" y1="670" x2="620" y2="670" class="extend-line"/>
+    <text x="630" y="675" class="relation-text">«extend» Relationship</text>
+    
+    <line x1="750" y1="670" x2="790" y2="670" class="relation-line" stroke-dasharray="8,4"/>
+    <text x="800" y="675" class="relation-text">Indirect Association</text>
+  </g>
+  
+  <!-- Annotations -->
+  <text x="1100" y="350" class="relation-text">Customer berinteraksi</text>
+  <text x="1100" y="365" class="relation-text">tidak langsung</text>
+  <text x="1100" y="380" class="relation-text">melalui Admin</text>
+  
+  <text x="100" y="560" class="relation-text">Supir terlibat dalam</text>
+  <text x="100" y="575" class="relation-text">proses transaksi</text>
+  <text x="100" y="590" class="relation-text">secara tidak langsung</text>
+  
+  <text x="1100" y="600" class="relation-text">Manager memantau</text>
+  <text x="1100" y="615" class="relation-text">laporan & statistik</text>
+  <text x="1100" y="630" class="relation-text">(read-only access)</text>
+</svg>

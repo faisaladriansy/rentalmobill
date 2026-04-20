@@ -1,0 +1,65 @@
+@startuml ActivityDiagram_EditTransaksi
+
+skinparam activityBackgroundColor LightCyan
+skinparam activityBorderColor DarkCyan
+skinparam activityDiamondBackgroundColor LightYellow
+skinparam activityDiamondBorderColor Orange
+
+title Activity Diagram - Edit Transaksi Rental
+
+start
+
+:Admin login ke sistem;
+
+:Buka halaman Data Transaksi;
+
+:Sistem tampilkan daftar transaksi;
+
+:Admin klik tombol "Edit"
+pada transaksi yang dipilih;
+
+if (Status transaksi = "selesai"?) then (ya)
+  :Tampilkan pesan
+  "Transaksi sudah selesai
+  tidak dapat diedit";
+  stop
+else (tidak)
+  :Sistem tampilkan form edit
+  terisi dengan data lama;
+  
+  :Admin ubah data yang diperlukan
+  (pelanggan, tanggal, mobil, supir);
+  
+  :Sistem hitung ulang
+  jumlah hari dan total biaya;
+  
+  if (Admin klik "Batal"?) then (ya)
+    :Kembali ke halaman
+    Data Transaksi;
+    :Perubahan tidak disimpan;
+    stop
+  else (tidak)
+    :Admin klik "Simpan";
+    
+    if (Data valid?) then (tidak)
+      :Tampilkan pesan error;
+      stop
+    else (ya)
+      :Perbarui data transaksi
+      di database;
+      
+      :Tampilkan pesan
+      "Transaksi berhasil diperbarui";
+      
+      :Kembali ke halaman
+      Data Transaksi;
+      
+      :Data transaksi muncul
+      dengan informasi terbaru;
+      
+      stop
+    endif
+  endif
+endif
+
+@enduml

@@ -1,0 +1,108 @@
+@startuml UseCase_Rental_Mobil
+
+!theme plain
+skinparam backgroundColor #f8f9fa
+skinparam actor {
+    BackgroundColor #e3f2fd
+    BorderColor #1976d2
+    FontColor #1976d2
+    FontSize 12
+}
+skinparam usecase {
+    BackgroundColor #fff3e0
+    BorderColor #f57c00
+    FontColor #e65100
+    FontSize 11
+}
+skinparam package {
+    BackgroundColor #f1f8e9
+    BorderColor #388e3c
+    FontColor #2e7d32
+    FontSize 14
+}
+
+' Actors
+actor "Customer" as C
+actor "Admin" as A
+actor "Supir" as S
+actor "Manager" as M
+
+' System Package
+package "Sistem Rental Mobil" {
+    ' Authentication
+    usecase "Login" as UC_Login
+    
+    ' Core Functions
+    usecase "Cek Ketersediaan & Hitung Biaya" as UC_Check
+    usecase "Buat Transaksi Baru" as UC_Create
+    usecase "Proses Sewa (Update Status)" as UC_Process
+    usecase "Cetak Invoice" as UC_Print
+    
+    ' Data Management
+    usecase "Kelola Data Mobil" as UC_Mobil
+    usecase "Kelola Data Merk" as UC_Merk
+    usecase "Kelola Data Supir" as UC_Supir
+    
+    ' Transaction Management
+    usecase "Edit Transaksi" as UC_Edit
+    usecase "Selesaikan Transaksi" as UC_Complete
+    
+    ' Reports & Monitoring (Manager Access)
+    usecase "Lihat Laporan Transaksi" as UC_Report
+    usecase "Pantau Keluar Masuk Mobil" as UC_Monitor
+    usecase "Lihat Dashboard Statistik" as UC_Dashboard
+    usecase "Export Data Laporan" as UC_Export
+    usecase "Filter Laporan by Periode" as UC_Filter
+    usecase "Lihat Detail Transaksi" as UC_Detail
+}
+
+' Admin Relationships
+A --> UC_Login : "Masuk sistem"
+A --> UC_Check : "Cek ketersediaan"
+A --> UC_Create : "Input data customer"
+A --> UC_Process : "Proses transaksi"
+A --> UC_Print : "Cetak invoice"
+A --> UC_Mobil : "Kelola mobil"
+A --> UC_Merk : "Kelola merk"
+A --> UC_Supir : "Kelola supir"
+A --> UC_Edit : "Edit transaksi"
+A --> UC_Complete : "Selesaikan sewa"
+
+' Customer Relationships
+C --> UC_Create : "Minta sewa mobil"
+
+' Supir Relationships
+S --> UC_Process : "Terima kendaraan"
+
+' Manager Relationships (Read-Only Access)
+M --> UC_Login : "Masuk sistem"
+M --> UC_Report : "Lihat laporan"
+M --> UC_Monitor : "Pantau status mobil"
+M --> UC_Dashboard : "Lihat statistik"
+M --> UC_Export : "Export laporan"
+M --> UC_Detail : "Lihat detail"
+
+' Include Relationships
+UC_Create ..> UC_Login : <<include>>
+UC_Create ..> UC_Check : <<include>>
+UC_Process ..> UC_Print : <<include>>
+UC_Edit ..> UC_Login : <<include>>
+UC_Complete ..> UC_Print : <<include>>
+UC_Report ..> UC_Login : <<include>>
+UC_Monitor ..> UC_Login : <<include>>
+UC_Dashboard ..> UC_Login : <<include>>
+UC_Report ..> UC_Filter : <<include>>
+UC_Report ..> UC_Detail : <<include>>
+
+' Extend Relationships
+UC_Process ..> UC_Create : <<extend>>
+UC_Complete ..> UC_Process : <<extend>>
+UC_Export ..> UC_Report : <<extend>>
+
+' Notes
+note right of C : Customer datang ke\nrental untuk menyewa\nmobil
+note left of A : Admin mengelola\nseluruh sistem dan\ntransaksi rental
+note bottom of S : Supir mengantarkan\nmobil kepada customer\n(opsional)
+note right of M : Manager memantau\nlaporan dan statistik\n(read-only access)
+
+@enduml

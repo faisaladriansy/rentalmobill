@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Case Diagram - Sistem Rental Mobil</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        .use-case-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .actor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 150px;
+        }
+        
+        .actor-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .actor-name {
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .system-boundary {
+            flex: 1;
+            border: 3px solid #34495e;
+            border-radius: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+            position: relative;
+            margin: 0 20px;
+        }
+        
+        .system-title {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 5px 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            border-radius: 10px;
+        }
+        
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .use-case {
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 25px;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #2c3e50;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .use-case:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .use-case.primary {
+            border-color: #e74c3c;
+            background: #ffe6e6;
+        }
+        
+        .use-case.primary:hover {
+            background: #e74c3c;
+        }
+        
+        .use-case.secondary {
+            border-color: #f39c12;
+            background: #fff3e0;
+        }
+        
+        .use-case.secondary:hover {
+            background: #f39c12;
+        }
+        
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: #7f8c8d;
+            z-index: 1;
+        }
+        
+        .legend {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .legend-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            margin-right: 10px;
+            border: 2px solid;
+        }
+        
+        .primary-color { 
+            background: #ffe6e6; 
+            border-color: #e74c3c;
+        }
+        
+        .secondary-color { 
+            background: #fff3e0; 
+            border-color: #f39c12;
+        }
+        
+        .normal-color { 
+            background: white; 
+            border-color: #3498db;
+        }
+        
+        .scenarios {
+            background: #e8f5e8;
+            border: 2px solid #27ae60;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .scenario {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .scenario-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .scenario-steps {
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            🎭 Use Case Diagram<br>
+            <span style="font-size: 20px; color: #7f8c8d;">Sistem Rental Mobil</span>
+        </div>
+        
+        <!-- Use Case Diagram -->
+        <div class="use-case-container">
+            <!-- Admin Actor -->
+            <div class="actor">
+                <div class="actor-icon">👨‍💼</div>
+                <div class="actor-name">ADMIN<br>RENTAL</div>
+            </div>
+            
+            <!-- System Boundary -->
+            <div class="system-boundary">
+                <div class="system-title">📱 Sistem Rental Mobil</div>
+                
+                <div class="use-case-grid">
+                    <!-- Primary Use Cases -->
+                    <div class="use-case primary">
+                        📋 Kelola Data Transaksi
+                    </div>
+                    <div class="use-case primary">
+                        🚗 Kelola Data Mobil
+                    </div>
+                    <div class="use-case primary">
+                        🏷️ Kelola Data Merk
+                    </div>
+                    <div class="use-case primary">
+                        👨‍💼 Kelola Data Supir
+                    </div>
+                    
+                    <!-- Secondary Use Cases -->
+                    <div class="use-case secondary">
+                        ➕ Tambah Transaksi Baru
+                    </div>
+                    <div class="use-case secondary">
+                        ✏️ Edit Transaksi
+                    </div>
+                    <div class="use-case secondary">
+                        ✅ Selesaikan Transaksi
+                    </div>
+                    <div class="use-case secondary">
+                        🔄 Update Status Mobil
+                    </div>
+                    
+                    <!-- Normal Use Cases -->
+                    <div class="use-case">
+                        📊 Lihat Laporan
+                    </div>
+                    <div class="use-case">
+                        🔍 Cari Data
+                    </div>
+                    <div class="use-case">
+                        📄 Cetak Invoice
+                    </div>
+                    <div class="use-case">
+                        🔐 Login/Logout
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Customer Actor -->
+            <div class="actor">
+                <div class="actor-icon">👤</div>
+                <div class="actor-name">CUSTOMER<br>(Implicit)</div>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">📖 Keterangan Use Case</div>
+            <div class="legend-grid">
+                <div>
+                    <div class="legend-item">
+                        <div class="legend-color primary-color"></div>
+                        <span>Primary Use Cases - Fungsi Utama</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color secondary-color"></div>
+                        <span>Secondary Use Cases - Fungsi Pendukung</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="legend-item">
+                        <div class="legend-color normal-color"></div>
+                        <span>Normal Use Cases - Fungsi Tambahan</span>
+                    </div>
+                    <div class="legend-item">
+                        <span style="margin-left: 30px;">👨‍💼 Admin - Pengguna Utama Sistem</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="legend-item">
+                        <span style="margin-left: 30px;">👤 Customer - Pelanggan (Data Input)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span style="margin-left: 30px;">📱 System Boundary - Batasan Sistem</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Detailed Scenarios -->
+        <div class="scenarios">
+            <div class="legend-title">🎬 Skenario Use Case Detail</div>
+            
+            <div class="scenario">
+                <div class="scenario-title">📋 Kelola Data Transaksi</div>
+                <div class="scenario-steps">
+                    <strong>Aktor:</strong> Admin Rental<br>
+                    <strong>Deskripsi:</strong> Admin mengelola semua data transaksi rental mobil<br>
+                    <strong>Langkah:</strong>
+                    1. Admin login ke sistem →
+                    2. Pilih menu "Data Transaksi" →
+                    3. Lihat daftar transaksi →
+                    4. Tambah/Edit/Hapus transaksi →
+                    5. Update status transaksi
+                </div>
+            </div>
+            
+            <div class="scenario">
+                <div class="scenario-title">🚗 Kelola Data Mobil</div>
+                <div class="scenario-steps">
+                    <strong>Aktor:</strong> Admin Rental<br>
+                    <strong>Deskripsi:</strong> Admin mengelola data mobil dan status ketersediaan<br>
+                    <strong>Langkah:</strong>
+                    1. Admin masuk ke menu "Data Mobil" →
+                    2. Lihat daftar mobil dengan status →
+                    3. Tambah mobil baru dengan pilih merk →
+                    4. Edit data mobil →
+                    5. Update status (Tersedia/Jalan)
+                </div>
+            </div>
+            
+            <div class="scenario">
+                <div class="scenario-title">➕ Tambah Transaksi Baru</div>
+                <div class="scenario-steps">
+                    <strong>Aktor:</strong> Admin Rental<br>
+                    <strong>Deskripsi:</strong> Admin membuat transaksi rental baru untuk customer<br>
+                    <strong>Langkah:</strong>
+                    1. Admin klik "Tambah Transaksi" →
+                    2. Input data customer (nama, KTP, HP, alamat) →
+                    3. Pilih mobil yang tersedia →
+                    4. Pilih supir atau lepas kunci →
+                    5. Set tanggal sewa dan kembali →
+                    6. Sistem hitung otomatis biaya →
+                    7. Simpan transaksi →
+                    8. Status mobil otomatis berubah "Jalan"
+                </div>
+            </div>
+            
+            <div class="scenario">
+                <div class="scenario-title">✅ Selesaikan Transaksi</div>
+                <div class="scenario-steps">
+                    <strong>Aktor:</strong> Admin Rental<br>
+                    <strong>Deskripsi:</strong> Admin menyelesaikan transaksi saat mobil dikembalikan<br>
+                    <strong>Langkah:</strong>
+                    1. Admin cari transaksi aktif →
+                    2. Klik button "Selesai" →
+                    3. Sistem update tanggal kembali →
+                    4. Sistem hitung total biaya final →
+                    5. Status transaksi berubah "Selesai" →
+                    6. Status mobil otomatis berubah "Tersedia" →
+                    7. Generate invoice PDF
+                </div>
+            </div>
+            
+            <div class="scenario">
+                <div class="scenario-title">🔄 Update Status Mobil</div>
+                <div class="scenario-steps">
+                    <strong>Aktor:</strong> Admin Rental<br>
+                    <strong>Deskripsi:</strong> Admin mengubah status mobil secara manual<br>
+                    <strong>Langkah:</strong>
+                    1. Admin buka "Data Mobil" →
+                    2. Lihat status mobil saat ini →
+                    3. Klik button status (Jalan/Tersedia) →
+                    4. Konfirmasi perubahan →
+                    5. Sistem update status di database →
+                    6. Status terupdate di semua tampilan
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

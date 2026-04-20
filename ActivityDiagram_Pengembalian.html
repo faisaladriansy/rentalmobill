@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Activity Diagram - Proses Pengembalian Mobil</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .wrap { max-width: 620px; margin: auto; background: white; padding: 20px; border: 1px solid #ccc; }
+        h2 { text-align: center; font-size: 16px; margin-bottom: 20px; }
+        button { padding: 8px 20px; background: #2a5298; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
+        textarea { width: 100%; height: 320px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.6; padding: 14px; border: 1px solid #ccc; border-radius: 6px; background: #f8f9fa; resize: vertical; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h2>Activity Diagram – Proses Pengembalian Mobil</h2>
+
+    <svg width="580" height="860" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="12">
+
+        <defs>
+            <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#333"/>
+            </marker>
+        </defs>
+
+        <!-- Swimlane border -->
+        <rect x="10" y="10" width="560" height="840" fill="none" stroke="#333" stroke-width="2"/>
+        <!-- Divider -->
+        <line x1="300" y1="10" x2="300" y2="850" stroke="#333" stroke-width="2"/>
+
+        <!-- Headers -->
+        <rect x="10"  y="10" width="290" height="35" fill="#f0f0f0" stroke="#333" stroke-width="1"/>
+        <rect x="300" y="10" width="270" height="35" fill="#f0f0f0" stroke="#333" stroke-width="1"/>
+        <text x="155" y="33" text-anchor="middle" font-weight="bold" font-size="14">Admin</text>
+        <text x="435" y="33" text-anchor="middle" font-weight="bold" font-size="14">Sistem</text>
+
+        <!-- ① Start -->
+        <circle cx="155" cy="75" r="10" fill="#000"/>
+
+        <!-- arrow down -->
+        <line x1="155" y1="85" x2="155" y2="108" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ② Admin Login -->
+        <rect x="60" y="110" width="190" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="155" y="133" text-anchor="middle">Admin Login Sistem</text>
+
+        <!-- arrow right -->
+        <line x1="250" y1="128" x2="318" y2="128" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ② Sistem: Halaman Utama -->
+        <rect x="320" y="110" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="425" y="124" text-anchor="middle">Sistem Menampilkan</text>
+        <text x="425" y="140" text-anchor="middle">Halaman Utama</text>
+
+        <!-- arrow down Admin -->
+        <line x1="155" y1="146" x2="155" y2="178" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- arrow down Sistem -->
+        <line x1="425" y1="148" x2="425" y2="178" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ③ Admin: Pilih Menu Transaksi -->
+        <rect x="50" y="180" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="155" y="198" text-anchor="middle">Admin Memilih</text>
+        <text x="155" y="212" text-anchor="middle">Menu Transaksi</text>
+
+        <!-- arrow right -->
+        <line x1="260" y1="198" x2="318" y2="198" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ③ Sistem: Tampil Daftar Transaksi -->
+        <rect x="320" y="180" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="425" y="198" text-anchor="middle">Menampilkan Daftar</text>
+        <text x="425" y="212" text-anchor="middle">Transaksi</text>
+
+        <!-- arrow down Admin -->
+        <line x1="155" y1="216" x2="155" y2="248" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- arrow down Sistem -->
+        <line x1="425" y1="216" x2="425" y2="248" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ④ Admin: Pilih Transaksi Aktif -->
+        <rect x="50" y="250" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="155" y="268" text-anchor="middle">Admin Memilih</text>
+        <text x="155" y="282" text-anchor="middle">Transaksi Aktif</text>
+
+        <!-- arrow right -->
+        <line x1="260" y1="268" x2="318" y2="268" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ④ Sistem: Tampil Detail -->
+        <rect x="320" y="250" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="425" y="268" text-anchor="middle">Menampilkan Detail</text>
+        <text x="425" y="282" text-anchor="middle">Transaksi</text>
+
+        <!-- arrow down Admin -->
+        <line x1="155" y1="286" x2="155" y2="318" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- arrow down Sistem -->
+        <line x1="425" y1="286" x2="425" y2="318" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ⑤ Admin: Klik Selesai -->
+        <rect x="50" y="320" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="155" y="338" text-anchor="middle">Admin Klik</text>
+        <text x="155" y="352" text-anchor="middle">Tombol Selesai</text>
+
+        <!-- arrow right -->
+        <line x1="260" y1="338" x2="318" y2="338" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ⑤ Sistem: Hitung Total -->
+        <rect x="320" y="320" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="425" y="338" text-anchor="middle">Sistem Menghitung</text>
+        <text x="425" y="352" text-anchor="middle">Total Biaya</text>
+
+        <!-- arrow down Sistem -->
+        <line x1="425" y1="356" x2="425" y2="388" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ⑥ Decision -->
+        <polygon points="425,390 460,415 425,440 390,415" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="425" y="419" text-anchor="middle" font-size="11">Konfirmasi?</text>
+
+        <!-- branch Tidak (kiri ke Admin) -->
+        <line x1="390" y1="415" x2="260" y2="415" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="320" y="408" text-anchor="middle" font-size="10" font-style="italic">Tidak</text>
+
+        <!-- Admin: Batal -->
+        <rect x="50" y="398" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="155" y="421" text-anchor="middle">Admin Membatalkan</text>
+
+        <!-- branch Ya (bawah) -->
+        <line x1="425" y1="440" x2="425" y2="468" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="440" y="458" font-size="10" font-style="italic">Ya</text>
+
+        <!-- ⑦ Update Status Transaksi -->
+        <rect x="320" y="470" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="425" y="488" text-anchor="middle">Update Status</text>
+        <text x="425" y="502" text-anchor="middle">Transaksi Selesai</text>
+
+        <!-- arrow down -->
+        <line x1="425" y1="506" x2="425" y2="538" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ⑧ Update Status Mobil -->
+        <rect x="320" y="540" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="425" y="558" text-anchor="middle">Update Status Mobil</text>
+        <text x="425" y="572" text-anchor="middle">Menjadi Tersedia</text>
+
+        <!-- arrow down -->
+        <line x1="425" y1="576" x2="425" y2="608" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ⑨ Simpan -->
+        <rect x="320" y="610" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="425" y="628" text-anchor="middle">Menyimpan</text>
+        <text x="425" y="642" text-anchor="middle">Data Pengembalian</text>
+
+        <!-- arrow down -->
+        <line x1="425" y1="646" x2="425" y2="678" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ⑩ Notifikasi -->
+        <rect x="320" y="680" width="210" height="36" rx="18" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="425" y="698" text-anchor="middle">Menampilkan Notifikasi</text>
+        <text x="425" y="712" text-anchor="middle">Pengembalian Berhasil</text>
+
+        <!-- arrow down -->
+        <line x1="425" y1="716" x2="425" y2="748" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <!-- ⑪ End -->
+        <circle cx="425" cy="762" r="10" fill="none" stroke="#333" stroke-width="2"/>
+        <circle cx="425" cy="762" r="6" fill="#000"/>
+
+    </svg>
+</div>
+
+<!-- PlantUML Code -->
+<div class="wrap" style="margin-top: 20px;">
+    <h2>📝 PlantUML Code</h2>
+    <button onclick="copyCode()">📋 Copy Code</button>
+    <span id="copied" style="color:green; font-size:13px; display:none; margin-left:8px;">✅ Copied!</span>
+    <textarea id="pumlCode" readonly>@startuml ActivityDiagram_Pengembalian
+
+|Admin|
+start
+:Admin Login Sistem;
+
+|Sistem|
+:Sistem Menampilkan Halaman Utama;
+
+|Admin|
+:Admin Memilih Menu Transaksi;
+
+|Sistem|
+:Menampilkan Daftar Transaksi;
+
+|Admin|
+:Admin Memilih Transaksi Aktif;
+
+|Sistem|
+:Menampilkan Detail Transaksi;
+
+|Admin|
+:Admin Klik Tombol Selesai;
+
+|Sistem|
+:Sistem Menghitung Total Biaya;
+
+if (Konfirmasi?) then
+  -> Tidak;
+  |Admin|
+  :Admin Membatalkan;
+  stop
+else
+  -> Ya;
+  :Update Status Transaksi Selesai;
+  :Update Status Mobil Menjadi Tersedia;
+  :Menyimpan Data Pengembalian;
+  :Menampilkan Notifikasi Pengembalian Berhasil;
+endif
+
+stop
+
+@enduml</textarea>
+</div>
+
+<script>
+function copyCode() {
+    const ta = document.getElementById('pumlCode');
+    ta.select();
+    ta.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    const msg = document.getElementById('copied');
+    msg.style.display = 'inline';
+    setTimeout(() => msg.style.display = 'none', 2000);
+}
+</script>
+</body>
+</html>

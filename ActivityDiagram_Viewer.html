@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Diagram - Skenario Use Case Transaksi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .diagram-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #2a5298;
+        }
+        
+        .diagram-section h2 {
+            color: #2a5298;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .diagram-section p {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box strong {
+            color: #1565c0;
+        }
+        
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .note-box strong {
+            color: #856404;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: #2a5298;
+            box-shadow: 0 4px 15px rgba(42, 82, 152, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .feature-card h3 {
+            color: #2a5298;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .feature-card p {
+            color: #6c757d;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .btn-download {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .highlight {
+            background: #e3f2fd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #1565c0;
+            font-weight: 600;
+        }
+        
+        .diagram-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .diagram-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #495057;
+            line-height: 1.6;
+        }
+        
+        .diagram-list li:before {
+            content: "📊";
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Activity Diagram</h1>
+            <p>Skenario Use Case Transaksi Rental Mobil dalam Bentuk Visual</p>
+        </div>
+        
+        <div class="content">
+            <div class="info-box">
+                <strong>ℹ️ Tentang Activity Diagram:</strong><br>
+                Activity Diagram adalah diagram yang menggambarkan alur kerja (workflow) atau aktivitas dari sebuah sistem, 
+                proses bisnis, atau use case. Diagram ini menunjukkan urutan aktivitas dan keputusan yang terjadi dalam proses.
+            </div>
+            
+            <!-- Diagram 1 -->
+            <div class="diagram-section">
+                <h2>📝 Diagram 1: Tambah Transaksi Rental Mobil</h2>
+                <p>
+                    Activity diagram ini menggambarkan alur lengkap proses penambahan transaksi rental mobil baru, 
+                    mulai dari admin login hingga transaksi berhasil disimpan.
+                </p>
+                
+                <div class="info-box">
+                    <strong>Alur Utama:</strong><br>
+                    Login → Buka Form → Isi Data Pelanggan → Pilih Tanggal → Pilih Mobil & Supir → 
+                    Sistem Hitung Biaya → Simpan → Ubah Status Mobil → Selesai
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>✅ Validasi Tanggal</h3>
+                        <p>Sistem memeriksa apakah tanggal kembali lebih awal dari tanggal sewa. Jika tidak valid, proses dihentikan.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ Validasi Data</h3>
+                        <p>Sistem memeriksa kelengkapan data sebelum menyimpan. Semua field wajib harus diisi.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>💰 Perhitungan Otomatis</h3>
+                        <p>Sistem otomatis menghitung jumlah hari dan total biaya berdasarkan tarif mobil dan supir.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🚗 Update Status</h3>
+                        <p>Status mobil otomatis berubah menjadi "sedang disewa" setelah transaksi disimpan.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diagram 2 -->
+            <div class="diagram-section">
+                <h2>✅ Diagram 2: Selesaikan Transaksi Rental</h2>
+                <p>
+                    Activity diagram ini menggambarkan proses penyelesaian transaksi rental, 
+                    termasuk konfirmasi admin dan pengembalian status mobil.
+                </p>
+                
+                <div class="info-box">
+                    <strong>Alur Utama:</strong><br>
+                    Login → Lihat Daftar → Pilih Transaksi Aktif → Klik Selesai → Konfirmasi → 
+                    Ubah Status Transaksi → Ubah Status Mobil → Selesai
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>⚠️ Konfirmasi</h3>
+                        <p>Admin harus mengkonfirmasi sebelum transaksi diselesaikan untuk menghindari kesalahan.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔄 Update Otomatis</h3>
+                        <p>Status transaksi dan mobil diperbarui secara otomatis dalam satu proses.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🚗 Mobil Tersedia</h3>
+                        <p>Mobil langsung tersedia untuk disewa kembali setelah transaksi selesai.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔒 Tombol Hilang</h3>
+                        <p>Tombol "Selesai" otomatis hilang setelah transaksi diselesaikan.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diagram 3 -->
+            <div class="diagram-section">
+                <h2>✏️ Diagram 3: Edit Transaksi Rental</h2>
+                <p>
+                    Activity diagram ini menggambarkan proses pengubahan data transaksi yang sudah ada, 
+                    dengan validasi status transaksi.
+                </p>
+                
+                <div class="info-box">
+                    <strong>Alur Utama:</strong><br>
+                    Login → Lihat Daftar → Klik Edit → Cek Status → Ubah Data → 
+                    Hitung Ulang → Simpan → Selesai
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>🔒 Validasi Status</h3>
+                        <p>Transaksi yang sudah selesai tidak dapat diedit untuk menjaga integritas data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔄 Perhitungan Ulang</h3>
+                        <p>Sistem otomatis menghitung ulang biaya jika tanggal atau mobil/supir diubah.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>❌ Opsi Batal</h3>
+                        <p>Admin dapat membatalkan perubahan kapan saja sebelum menyimpan.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ Validasi Data</h3>
+                        <p>Data yang diubah tetap divalidasi sebelum disimpan ke database.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diagram 4 -->
+            <div class="diagram-section">
+                <h2>🗑️ Diagram 4: Hapus Transaksi Rental</h2>
+                <p>
+                    Activity diagram ini menggambarkan proses penghapusan transaksi, 
+                    termasuk pengembalian status mobil jika transaksi masih aktif.
+                </p>
+                
+                <div class="info-box">
+                    <strong>Alur Utama:</strong><br>
+                    Login → Lihat Daftar → Klik Hapus → Konfirmasi → Cek Status → 
+                    Kembalikan Status Mobil (jika aktif) → Hapus Data → Selesai
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>⚠️ Konfirmasi Hapus</h3>
+                        <p>Admin harus mengkonfirmasi penghapusan untuk menghindari penghapusan tidak sengaja.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔍 Cek Status</h3>
+                        <p>Sistem memeriksa status transaksi sebelum menghapus untuk menentukan aksi selanjutnya.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🚗 Kembalikan Mobil</h3>
+                        <p>Jika transaksi aktif, status mobil dikembalikan menjadi "tersedia" sebelum dihapus.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🗑️ Hapus Permanen</h3>
+                        <p>Data transaksi dihapus permanen dari database dan tidak dapat dikembalikan.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <strong>💡 Cara Melihat Diagram:</strong><br>
+                1. Buka file .puml dengan PlantUML viewer atau extension di VS Code/IntelliJ IDEA<br>
+                2. Atau gunakan PlantUML online: <a href="http://www.plantuml.com/plantuml/uml/" target="_blank">plantuml.com</a><br>
+                3. Activity diagram menggunakan simbol:<br>
+                &nbsp;&nbsp;&nbsp;• Kotak bulat = Aktivitas/Proses<br>
+                &nbsp;&nbsp;&nbsp;• Diamond = Keputusan (if/else)<br>
+                &nbsp;&nbsp;&nbsp;• Lingkaran hitam = Start<br>
+                &nbsp;&nbsp;&nbsp;• Lingkaran hitam dengan border = Stop/End
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <h3 style="color: #2a5298; margin-bottom: 20px;">Download Activity Diagrams</h3>
+                <a href="ActivityDiagram_Transaksi.puml" class="btn-download" download>
+                    📥 Tambah Transaksi
+                </a>
+                <a href="ActivityDiagram_SelesaiTransaksi.puml" class="btn-download" download>
+                    📥 Selesaikan Transaksi
+                </a>
+                <a href="ActivityDiagram_EditTransaksi.puml" class="btn-download" download>
+                    📥 Edit Transaksi
+                </a>
+                <a href="ActivityDiagram_HapusTransaksi.puml" class="btn-download" download>
+                    📥 Hapus Transaksi
+                </a>
+            </div>
+            
+            <div class="diagram-section" style="margin-top: 40px;">
+                <h2>📚 Daftar Semua Diagram</h2>
+                <ul class="diagram-list">
+                    <li><strong>ActivityDiagram_Transaksi.puml</strong> - Proses tambah transaksi rental mobil baru</li>
+                    <li><strong>ActivityDiagram_SelesaiTransaksi.puml</strong> - Proses menyelesaikan transaksi rental</li>
+                    <li><strong>ActivityDiagram_EditTransaksi.puml</strong> - Proses mengubah data transaksi</li>
+                    <li><strong>ActivityDiagram_HapusTransaksi.puml</strong> - Proses menghapus transaksi</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Activity Diagram - Sistem Rental Mobil © 2024</p>
+            <p>Generated with PlantUML | Skenario Use Case dalam Bentuk Visual</p>
+        </div>
+    </div>
+</body>
+</html>

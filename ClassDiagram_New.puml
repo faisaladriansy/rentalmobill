@@ -1,0 +1,235 @@
+@startuml ClassDiagram_RentalMobil
+
+' Konfigurasi Visual
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam backgroundColor #F8F9FA
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor #2C3E50
+    ArrowColor #3498DB
+    FontSize 11
+    FontName Calibri
+    AttributeFontSize 10
+    HeaderBackgroundColor #3498DB
+    HeaderFontColor white
+}
+
+skinparam stereotypeCBackgroundColor #E8F6F3
+skinparam note {
+    BackgroundColor #FFF9E6
+    BorderColor #F39C12
+    FontSize 10
+}
+
+' ==================== USER CLASS ====================
+class User {
+    **PK** iduser : int
+    username : varchar(20)
+    password : varchar(50)
+    lastlogin : datetime
+    stuser : int
+    __
+    + cek_login() : bool
+    + authenticate() : User
+}
+
+' ==================== MERK CLASS ====================
+class Merk {
+    **PK** idmerk : int
+    namamerk : varchar(100)
+    namamerk_seo : varchar(100)
+    __
+    + GetMerk() : array
+    + GetData() : Merk
+    + insert() : bool
+    + delete() : bool
+}
+
+' ==================== MOBIL CLASS ====================
+class Mobil {
+    **PK** idmobil : int
+    **FK** idmerk : int
+    date : datetime
+    type : varchar(20)
+    tahunproduksi : int
+    platnomer : varchar(15)
+    kursi : int
+    tarif : int
+    lembur : int
+    norangka : varchar(20)
+    foto : varchar(200)
+    update : datetime
+    stmobil : enum
+    __
+    + GetMobil() : array
+    + GetData() : Mobil
+    + getMerk() : array
+    + insert() : bool
+    + delete() : bool
+}
+
+' ==================== SUPIR CLASS ====================
+class Supir {
+    **PK** idsupir : int
+    date : datetime
+    namasupir : varchar(30)
+    tgllahir : date
+    alamat : varchar(200)
+    noktp : varchar(100)
+    foto : varchar(100)
+    tarif : int
+    lembur : int
+    __
+    + Getsupir() : array
+    + GetData() : Supir
+    + insert() : bool
+    + delete() : bool
+}
+
+' ==================== TRANSAKSI CLASS ====================
+class Transaksi {
+    **PK** idtransaksi : int
+    **FK** idmobil : int
+    **FK** idsupir : int
+    date : datetime
+    namapelanggan : varchar(20)
+    noktp : varchar(20)
+    nohp : varchar(20)
+    alamat : varchar(100)
+    tglsewa : date
+    tglkembali : date
+    selisih : int
+    total : int
+    sttransaksi : enum
+    __
+    + Gettransaksi() : array
+    + GetData() : Transaksi
+    + getMobil() : array
+    + getSupir() : array
+    + getAllMobil() : array
+    + insert() : bool
+    + delete() : bool
+    + updatest() : bool
+}
+
+' ==================== MANAGER CLASS ====================
+class Manager {
+    + getStatistik() : array
+    + getMobilTersedia() : array
+    + getMobilJalan() : array
+    + getStatistikMobil() : array
+    + getLaporanTransaksi() : array
+    + getDetailTransaksi() : Transaksi
+    + getStatistikLengkap() : array
+    + getGrafikBulanan() : array
+    + getMobilPopuler() : array
+}
+
+' ==================== RELATIONSHIPS ====================
+
+' Relasi Merk ke Mobil (1 ke many)
+Merk "1" -- "*" Mobil : memiliki
+
+' Relasi Mobil ke Transaksi (1 ke many)
+Mobil "1" -- "*" Transaksi : disewa dalam
+
+' Relasi Supir ke Transaksi (0 atau 1 ke many)
+' Supir dapat tidak ada dalam transaksi (lepas kunci)
+Supir "0..1" -- "*" Transaksi : mengendarai
+
+' Manager menggunakan data dari class lain
+Mobil .> Manager
+Transaksi .> Manager
+
+' ==================== NOTES ====================
+
+note top of User
+    <b>Fungsi:</b>
+    - Login dan autentikasi pengguna
+    - Manajemen sesi user
+    
+    <b>Atribut:</b>
+    - stuser: 1=aktif, 0=nonaktif
+    - password: di-hash dengan MD5
+end note
+
+note top of Merk
+    <b>Fungsi:</b>
+    - Menyimpan data merk mobil
+    
+    <b>Contoh:</b>
+    Toyota, Honda, Daihatsu, dll
+end note
+
+note top of Mobil
+    <b>Fungsi:</b>
+    - Menyimpan data mobil rental
+    
+    <b>Status Mobil:</b>
+    - bebas: tersedia untuk disewa
+    - jalan: sedang dalam transaksi
+    
+    <b>Relasi:</b>
+    - Memiliki satu Merk
+    - Dapat disewa dalam banyak Transaksi
+end note
+
+note top of Supir
+    <b>Fungsi:</b>
+    - Menyimpan data supir
+    
+    <b>Tarif:</b>
+    - tarif: harga per hari
+    - lembur: harga per jam overtime
+    
+    <b>Catatan:</b>
+    - Bersifat opsional dalam transaksi
+    - idsupir = 0 untuk lepas kunci
+end note
+
+note top of Transaksi
+    <b>Fungsi:</b>
+    - Mengelola transaksi rental
+    
+    <b>Status Transaksi:</b>
+    - mulai: transaksi aktif/sedang berjalan
+    - selesai: transaksi sudah dikembalikan
+    
+    <b>Perhitungan Total:</b>
+    Total = (tarif mobil × selisih hari) 
+          + (tarif supir × selisih hari)
+end note
+
+note top of Manager
+    <b>Fungsi:</b>
+    - Dashboard dan laporan untuk manager
+    - Statistik dan analisis data
+    
+    <b>Fitur:</b>
+    - Monitoring mobil tersedia/jalan
+    - Laporan transaksi dengan filter
+    - Grafik pendapatan bulanan
+    - Mobil populer
+end note
+
+' ==================== LEGEND ====================
+
+legend right
+    <b>Keterangan Simbol:</b>
+    {static} PK = Primary Key
+    {static} FK = Foreign Key
+    ____ = Separator
+    
+    <b>Kardinalitas:</b>
+    1        = Satu
+    *        = Banyak
+    0..1     = Nol atau satu
+    
+    <b>Status Enum:</b>
+    stmobil: bebas, jalan
+    sttransaksi: mulai, selesai
+end legend
+
+@enduml

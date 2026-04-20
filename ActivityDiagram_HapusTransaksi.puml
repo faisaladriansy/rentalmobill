@@ -1,0 +1,55 @@
+@startuml ActivityDiagram_HapusTransaksi
+
+skinparam activityBackgroundColor LightPink
+skinparam activityBorderColor DarkRed
+skinparam activityDiamondBackgroundColor LightYellow
+skinparam activityDiamondBorderColor Orange
+
+title Activity Diagram - Hapus Transaksi Rental
+
+start
+
+:Admin login ke sistem;
+
+:Buka halaman Data Transaksi;
+
+:Sistem tampilkan daftar transaksi;
+
+:Admin klik tombol "Hapus"
+pada transaksi yang dipilih;
+
+:Sistem tampilkan dialog konfirmasi
+"Apakah Anda yakin ingin
+menghapus transaksi ini?";
+
+if (Admin konfirmasi?) then (tidak)
+  :Dialog ditutup;
+  :Data tidak dihapus;
+  stop
+else (ya)
+  :Sistem periksa status transaksi;
+  
+  if (Status = "aktif"?) then (ya)
+    :Ubah status mobil
+    menjadi "tersedia";
+  else (tidak)
+    :Tidak perlu ubah
+    status mobil;
+  endif
+  
+  :Hapus data transaksi
+  dari database;
+  
+  :Tampilkan pesan
+  "Transaksi berhasil dihapus";
+  
+  :Perbarui tampilan
+  daftar transaksi;
+  
+  :Transaksi yang dihapus
+  tidak muncul lagi di daftar;
+  
+  stop
+endif
+
+@enduml

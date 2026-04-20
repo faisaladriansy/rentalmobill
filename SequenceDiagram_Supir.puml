@@ -1,0 +1,37 @@
+@startuml SequenceDiagram_Supir_Simple
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 10
+
+actor Admin
+participant "Sistem" as sistem
+database "Database" as db
+
+title Sequence Diagram Sederhana - Data Supir
+
+== Kelola Data Supir ==
+Admin -> sistem : Buka halaman supir
+sistem -> db : Ambil data supir
+db --> sistem : Daftar supir
+sistem --> Admin : Tampilkan daftar supir
+
+Admin -> sistem : Tambah/Ubah/Hapus supir
+note right of Admin
+  Data supir:
+  - Nama
+  - Alamat
+  - Nomor Telepon
+  - Foto
+end note
+sistem -> db : Simpan perubahan
+db --> sistem : Berhasil
+sistem --> Admin : Data supir berhasil diperbarui
+
+note over Admin, db
+  **Keterangan:**
+  - Admin dapat menambah, mengubah, atau menghapus data supir
+  - Data supir: nama, alamat, telepon, dan foto
+  - Supir bersifat opsional dalam transaksi (lepas kunci)
+end note
+
+@enduml

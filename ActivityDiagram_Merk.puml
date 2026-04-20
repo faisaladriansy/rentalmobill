@@ -1,0 +1,45 @@
+@startuml ActivityDiagram_Merk_Simple
+
+skinparam activityBackgroundColor LightYellow
+skinparam activityBorderColor Orange
+skinparam activityDiamondBackgroundColor LightPink
+skinparam activityDiamondBorderColor Red
+
+title Activity Diagram Sederhana - Kelola Data Merk
+
+start
+
+:Admin buka halaman Merk;
+
+:Sistem tampilkan daftar merk;
+
+if (Pilih aksi?) then (Tambah/Ubah)
+  :Admin isi form data merk;
+  
+  if (Data valid?) then (tidak)
+    :Tampilkan pesan error;
+    stop
+  else (ya)
+    :Simpan data merk;
+    
+    :Tampilkan pesan berhasil;
+    
+    stop
+  endif
+  
+else (Hapus)
+  :Admin klik tombol hapus;
+  
+  if (Admin konfirmasi?) then (tidak)
+    :Batal;
+    stop
+  else (ya)
+    :Hapus data merk;
+    
+    :Tampilkan pesan berhasil;
+    
+    stop
+  endif
+endif
+
+@enduml
